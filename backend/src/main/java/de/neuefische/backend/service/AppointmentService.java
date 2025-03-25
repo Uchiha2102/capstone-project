@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AppointmentService {
@@ -19,7 +20,7 @@ public class AppointmentService {
         return repository.save(appointment);
     }
 
-    public Appointment updateAppointment(String id, Appointment updatedAppointment){
+    public Appointment updateAppointment(String id, Appointment updatedAppointment) {
         Appointment existingAppointment = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Appointment with ID " + id + " not found"));
         existingAppointment.setDate(updatedAppointment.getDate());
@@ -29,7 +30,7 @@ public class AppointmentService {
         return repository.save(existingAppointment);
     }
 
-    public void deleteAppointment(String id){
+    public void deleteAppointment(String id) {
         repository.deleteById(id);
     }
 }

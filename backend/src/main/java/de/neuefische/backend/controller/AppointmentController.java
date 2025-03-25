@@ -15,18 +15,20 @@ public class AppointmentController {
     private final AppointmentService service;
 
     @GetMapping
-    public List<Appointment> getAllAppointments(){
+    public List<Appointment> getAllAppointments() {
         return service.getAllAppointments();
     }
+
     @PostMapping
     public Appointment createAppointment(@RequestBody Appointment appointment) {
         return service.createAppointment(appointment);
     }
 
-    @PutMapping ("/{id}")
+    @PutMapping("/{id}")
     public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
         return service.updateAppointment(id, appointment);
     }
+
     @DeleteMapping("/{id}")
     public void deleteAppointment(@PathVariable String id) {
         service.deleteAppointment(id);
