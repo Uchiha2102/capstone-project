@@ -23,7 +23,14 @@ public class AppointmentController {
         return service.createAppointment(appointment);
     }
 
-
+    @PutMapping ("/{id}")
+    public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
+        return service.updateAppointment(id, appointment);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteAppointment(@PathVariable String id) {
+        service.deleteAppointment(id);
+    }
 
 
 }
