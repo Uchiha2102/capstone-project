@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {BrowserRouter as Router, Route, Routes, Link, useLocation} from "react-router-dom";
+import Appointments from "./pages/Appointments.tsx";
+import CreateAppointment from "./pages/CreateAppointment.tsx";
+import EditAppointment from "./pages/EditAppointment.tsx";
+import Home from "./components/Home.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Header = () => {
+    const location = useLocation();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    return (
+        <header className="main-header">
+            <nav>
+                <ul className="nav-links">
+                    <li><Link to="/" className={location.pathname === "/" ? "active" : ""}>Home</Link></li>
+                    <li><Link to="/appointments"
+                              className={location.pathname.includes("/appointments") ? "active" : ""}>Appointments</Link>
+                    </li>
+                    <li><Link to="/documents"
+                              className={location.pathname === "/documents" ? "active" : ""}>Documents</Link></li>
+                </ul>
+            </nav>
+        </header>
+    );
+};
 
-export default App
+const SubNavigation = () => {
+    const location = useLocation();
+
+    if (location.pathname.includes("/appointments")) {
+        return (
+            <nav className="sub-nav">
+                <ul className="nav-links">
+                    <li><Link to="/appointments"
+                              className={location.pathname === "/appointments" ? "active" : ""}>Appointments</Link></li>
+                    <li><Link to="/create" className={location.pathname === "/create" ? "active" : ""}>New
+                        Appointment</Link></li>
+                </ul>
+            </nav>
+        );
+    }
+    return null;
+};
+
+const App = () => {
+    return (
+        <Router>
+            <Header/>
+            <SubNavigation/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+
+                <Route path="/appointments" element={<Appointments/>}/>
+
+                <Route path="/create" element={<CreateAppointment/>}/>
+
+                <Route path="/edit/:id" element={<EditAppointment/>}/>
+            </Routes>
+        </Router>
+    );
+};
+export default App;

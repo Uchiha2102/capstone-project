@@ -14,10 +14,16 @@ import java.util.List;
 public class AppointmentController {
     private final AppointmentService service;
 
+
     @GetMapping
     public List<Appointment> getAllAppointments() {
         return service.getAllAppointments();
     }
+    @GetMapping("/{id}")
+    public Appointment getAppointmentById(@PathVariable String id) {
+        return service.getAppointmentById(id);
+    }
+
 
     @PostMapping
     public Appointment createAppointment(@RequestBody Appointment appointment) {
@@ -33,6 +39,4 @@ public class AppointmentController {
     public void deleteAppointment(@PathVariable String id) {
         service.deleteAppointment(id);
     }
-
-
 }
