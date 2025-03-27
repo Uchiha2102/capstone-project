@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import "../CSS/Appointments.css";
 
 
+
 type Appointment = {
     id: string;
     date: string;

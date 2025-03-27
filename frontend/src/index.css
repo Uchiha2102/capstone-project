@@ -1,0 +1,9 @@
+body {
+    background: linear-gradient(to bottom, lightblue 50%, white 50%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}

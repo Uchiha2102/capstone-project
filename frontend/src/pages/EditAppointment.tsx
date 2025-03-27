@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-
 type Appointment = {
     id: string;
     date: string;
@@ -47,50 +46,59 @@ const EditAppointment = () => {
     }
 
     return (
-        <div>
-            <h1>Edit Appointment</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Date: </label>
-                    <input
-                        type="date"
-                        name="date"
-                        value={appointment.date}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Time: </label>
-                    <input
-                        type="time"
-                        name="time"
-                        value={appointment.time}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Dentist: </label>
-                    <input
-                        type="text"
-                        name="dentistName"
-                        value={appointment.dentistName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Description: </label>
-                    <textarea
-                        name="description"
-                        value={appointment.description}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Save changes</button>
-            </form>
+        <div className="edit-appointment-modal">
+            <div className="modal-content">
+                <h1>Edit Appointment</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="editAppointmentDate">Date:</label>
+                        <input
+                            id="editAppointmentDate"
+                            type="date"
+                            name="date"
+                            value={appointment.date}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="editAppointmentTime">Time:</label>
+                        <input
+                            id="editAppointmentTime"
+                            type="time"
+                            name="time"
+                            value={appointment.time}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="editDentistName">Dentist:</label>
+                        <input
+                            id="editDentistName"
+                            type="text"
+                            name="dentistName"
+                            value={appointment.dentistName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="editAppointmentDescription">Description:</label>
+                        <textarea
+                            id="editAppointmentDescription"
+                            name="description"
+                            value={appointment.description}
+                            onChange={handleChange}
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit">Save changes</button>
+                    <button type="button" onClick={() => navigate("/appointments")}>
+                        Cancel
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
