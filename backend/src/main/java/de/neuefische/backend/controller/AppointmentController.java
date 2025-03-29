@@ -6,6 +6,7 @@ import de.neuefische.backend.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class AppointmentController {
     public List<Appointment> getAllAppointments() {
         return service.getAllAppointments();
     }
+
     @GetMapping("/{id}")
     public Appointment getAppointmentById(@PathVariable String id) {
         return service.getAppointmentById(id);
@@ -29,6 +31,7 @@ public class AppointmentController {
     public Appointment createAppointment(@RequestBody Appointment appointment) {
         return service.createAppointment(appointment);
     }
+
 
     @PutMapping("/{id}")
     public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {

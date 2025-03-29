@@ -3,14 +3,13 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import "../CSS/Appointments.css";
 
-
-
 type Appointment = {
     id: string;
     date: string;
     time: string;
     dentistName: string;
     description: string;
+
 };
 
 const Appointments = () => {
@@ -36,7 +35,6 @@ const Appointments = () => {
             .catch((error) => console.error("Error deleting the appointment:", error));
     };
 
-
     return (
         <div className="appointments-container">
             <h1 className="appointments-title">Appointments</h1>
@@ -53,8 +51,8 @@ const Appointments = () => {
                             </div>
                             <div className="appointment-dentist">{appointment.dentistName}</div>
                             <div className="appointment-description">{appointment.description}</div>
-                            </div>
-                            <div className="appointment-actions">
+                        </div>
+                        <div className="appointment-actions">
                             <Link
                                 className="button edit-button"
                                 to={`/edit/${appointment.id}`}
@@ -74,5 +72,4 @@ const Appointments = () => {
         </div>
     );
 };
-
 export default Appointments;
