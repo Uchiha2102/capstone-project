@@ -84,6 +84,17 @@ class XrayServiceTest {
         //THEN
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(id);
+    }
 
+    @Test
+    void deleteImage_shouldDeleteImageById() {
+        //GIVEN
+        String id = "1";
+
+        //WHEN
+        service.deleteImage(id);
+
+        //THEN
+        verify(repository,times(1)).deleteById(id);
     }
 }
