@@ -1,12 +1,13 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.XRayImage;
+import de.neuefische.backend.model.XrayImage;
 import de.neuefische.backend.repository.XRayImageRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -24,11 +25,11 @@ class XrayServiceTest {
 
     @Test
     void saveXRayImage_shouldSaveAndReturnImage() throws IOException {
-        // Given
+        // GIVEN
         String userId = "123";
         MockMultipartFile file = new MockMultipartFile("file", "example.png", "image/png", "test data".getBytes());
 
-        XRayImage savedImage = new XRayImage();
+        XrayImage savedImage = new XrayImage();
         savedImage.setId("1");
         savedImage.setUserId(userId);
         savedImage.setFileName(file.getOriginalFilename());
@@ -36,12 +37,12 @@ class XrayServiceTest {
         savedImage.setData(file.getBytes());
         savedImage.setUploadDate(new Date());
 
-        when(repository.save(any(XRayImage.class))).thenReturn(savedImage);
+        when(repository.save(any(XrayImage.class))).thenReturn(savedImage);
 
-        // When
-        XRayImage result = service.saveXRayImage(userId, file);
+        // WHEN
+        XrayImage result = service.saveXRayImage(userId, file);
 
-        // Then
+        // THEN
         assertThat(result.getId()).isEqualTo("1");
         assertThat(result.getUserId()).isEqualTo(userId);
         assertThat(result.getFileName()).isEqualTo("example.png");
@@ -49,4 +50,24 @@ class XrayServiceTest {
         assertThat(result.getData()).isEqualTo(file.getBytes());
     }
 
+    @Test
+    void getUserImages_shouldReturnListOfImages(){
+
+        //GIVEN
+        String userId = "123";
+        XrayImage image1 = new XrayImage();
+        image1.setId("1");
+        XrayImage image2 = new XrayImage();
+        image2.setId("2");
+
+        when(repository.findByUserId(userId)).thenReturn(Arrays.asList(image1, image2));
+
+        // WHEN
+        var result = service.getUserImages(userId);
+
+        // THEN
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getId()).isEqualTo("1");
+        assertThat(result.get(1).getId()).isEqualTo("2");
+    }
 }
