@@ -9,19 +9,17 @@ import org.springframework.mock.web.MockMultipartFile;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-
 class XrayServiceTest {
 
     private final XRayImageRepository repository = Mockito.mock(XRayImageRepository.class);
     private final XRayImageService service = new XRayImageService(repository);
-
-
 
     @Test
     void saveXRayImage_shouldSaveAndReturnImage() throws IOException {
@@ -51,7 +49,7 @@ class XrayServiceTest {
     }
 
     @Test
-    void getUserImages_shouldReturnListOfImages(){
+    void getUserImages_shouldReturnListOfImages() {
 
         //GIVEN
         String userId = "123";
@@ -69,5 +67,23 @@ class XrayServiceTest {
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getId()).isEqualTo("1");
         assertThat(result.get(1).getId()).isEqualTo("2");
+    }
+
+    @Test
+    void getImageById_shouldReturnImage() {
+        // GIVEN
+        String id = "1";
+        XrayImage image = new XrayImage();
+        image.setId(id);
+
+        when(repository.findById(id)).thenReturn(Optional.of(image));
+
+        // WHEN
+        var result = service.getImageById(id);
+
+        //THEN
+        assertThat(result).isNotNull();
+        assertThat(result.getId()).isEqualTo(id);
+
     }
 }
