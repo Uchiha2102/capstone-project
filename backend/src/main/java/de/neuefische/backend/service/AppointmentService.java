@@ -13,10 +13,10 @@ public class AppointmentService {
     private final AppointmentRepository repository;
 
 
-
     public List<Appointment> getAllAppointments() {
         return repository.findAll();
     }
+
     public Appointment getAppointmentById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Appointment with ID " + id + " not found"));
@@ -39,4 +39,5 @@ public class AppointmentService {
     public void deleteAppointment(String id) {
         repository.deleteById(id);
     }
+
 }
