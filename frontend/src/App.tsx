@@ -1,11 +1,12 @@
-import './App.css'
+import './CSS/App.css'
 import {BrowserRouter as Router, Route, Routes, Link, useLocation} from "react-router-dom";
 import Appointments from "./pages/Appointments.tsx";
 import CreateAppointment from "./pages/CreateAppointment.tsx";
 import EditAppointment from "./pages/EditAppointment.tsx";
-import Home from "./components/Home.tsx";
+import Home from "./pages/Home.tsx";
 import XRayDocuments from "./components/XRayDocuments.tsx";
 import './CSS/XrayImage.css';
+
 const Header = () => {
     const location = useLocation();
 
@@ -82,3 +83,4 @@ const App = () => {
 };
 
 export default App;
+

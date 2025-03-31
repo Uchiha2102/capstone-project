@@ -8,6 +8,7 @@ import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
@@ -97,4 +98,17 @@ class XrayServiceTest {
         //THEN
         verify(repository,times(1)).deleteById(id);
     }
+    @Test
+    void getUserImages_shouldHandleMissingUser() {
+        // GIVEN
+        String userId = "non_existent_user";
+        when(repository.findByUserId(userId)).thenReturn(Collections.emptyList());
+
+        // WHEN
+        var result = service.getUserImages(userId);
+
+        // THEN
+        assertThat(result).isEmpty();
+    }
+
 }

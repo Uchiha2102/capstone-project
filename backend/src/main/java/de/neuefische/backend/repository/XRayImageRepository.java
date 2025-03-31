@@ -10,3 +10,4 @@ import java.util.List;
 public interface XRayImageRepository extends MongoRepository<XrayImage, String> {
     List<XrayImage> findByUserId(String userId);
 }
+
