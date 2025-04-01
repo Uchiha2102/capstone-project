@@ -1,6 +1,6 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.XrayImage;
+import de.neuefische.backend.model.XRayImage;
 import de.neuefische.backend.repository.XRayImageRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -28,7 +28,7 @@ class XrayServiceTest {
         String userId = "123";
         MockMultipartFile file = new MockMultipartFile("file", "example.png", "image/png", "test data".getBytes());
 
-        XrayImage savedImage = new XrayImage();
+        XRayImage savedImage = new XRayImage();
         savedImage.setId("1");
         savedImage.setUserId(userId);
         savedImage.setFileName(file.getOriginalFilename());
@@ -36,10 +36,10 @@ class XrayServiceTest {
         savedImage.setData(file.getBytes());
         savedImage.setUploadDate(new Date());
 
-        when(repository.save(any(XrayImage.class))).thenReturn(savedImage);
+        when(repository.save(any(XRayImage.class))).thenReturn(savedImage);
 
         // WHEN
-        XrayImage result = service.saveXRayImage(userId, file);
+        XRayImage result = service.saveXRayImage(userId, file);
 
         // THEN
         assertThat(result.getId()).isEqualTo("1");
@@ -54,9 +54,9 @@ class XrayServiceTest {
 
         //GIVEN
         String userId = "123";
-        XrayImage image1 = new XrayImage();
+        XRayImage image1 = new XRayImage();
         image1.setId("1");
-        XrayImage image2 = new XrayImage();
+        XRayImage image2 = new XRayImage();
         image2.setId("2");
 
         when(repository.findByUserId(userId)).thenReturn(Arrays.asList(image1, image2));
@@ -74,7 +74,7 @@ class XrayServiceTest {
     void getImageById_shouldReturnImage() {
         // GIVEN
         String id = "1";
-        XrayImage image = new XrayImage();
+        XRayImage image = new XRayImage();
         image.setId(id);
 
         when(repository.findById(id)).thenReturn(Optional.of(image));

@@ -1,6 +1,7 @@
 package de.neuefische.backend.security;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -11,26 +12,31 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+
+    @Value("${app.url}")
+    private String appUrl;
+
     @Bean
+    @SuppressWarnings("squid:S4502")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/me").authenticated()
-                        .anyRequest().permitAll()
+                .authorizeHttpRequests(a -> a
+                        .requestMatchers("/api/auth/me").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .logout(l -> l.logoutSuccessUrl(appUrl + "/logout"))
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl("/api/auth/me", true)
-                );
+                .oauth2Login(o -> o.defaultSuccessUrl(appUrl + "/"));
         return http.build();
+    }
 
-    }
-    }
+}
 

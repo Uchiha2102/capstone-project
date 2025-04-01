@@ -1,6 +1,6 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.model.XrayImage;
+import de.neuefische.backend.model.XRayImage;
 import de.neuefische.backend.repository.XRayImageRepository;
 
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ public class XRayImageService {
         this.repository = repository;
     }
 
-    public XrayImage saveXRayImage(String userId, MultipartFile file) throws IOException {
-        XrayImage image = new XrayImage();
+    public XRayImage saveXRayImage(String userId, MultipartFile file) throws IOException {
+        XRayImage image = new XRayImage();
         image.setUserId(userId);
         image.setFileName(file.getOriginalFilename());
         image.setFileType(file.getContentType());
@@ -29,11 +29,11 @@ public class XRayImageService {
         return repository.save(image);
     }
 
-    public List<XrayImage> getUserImages(String userId) {
+    public List<XRayImage> getUserImages(String userId) {
         return repository.findByUserId(userId);
     }
 
-    public XrayImage getImageById(String id) {
+    public XRayImage getImageById(String id) {
         return repository.findById(id).orElse(null);
     }
 

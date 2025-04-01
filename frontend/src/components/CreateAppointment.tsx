@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
-
 const CreateAppointment = () => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");

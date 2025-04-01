@@ -1,3 +1,6 @@
+
+import Login from "../Auth/Login.tsx";
+
 const Home = () => {
     return (
         <div style={{textAlign: "center", padding: "20px"}}>
@@ -7,6 +10,9 @@ const Home = () => {
                 -Manage your dental health with ease.
                 -Plan and track dentist visits efficiently.
             </p>
+            <div style={{marginTop: "30px"}}>
+                <Login/>
+            </div>
         </div>
     );
 };

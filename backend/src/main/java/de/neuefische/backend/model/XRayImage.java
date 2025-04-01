@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Document(collection = "xray_images")
-public class XrayImage {
+public class XRayImage {
     @Id
     private String id;
     private String userId;

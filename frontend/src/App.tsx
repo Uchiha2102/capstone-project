@@ -1,86 +1,45 @@
 import './CSS/App.css'
-import {BrowserRouter as Router, Route, Routes, Link, useLocation} from "react-router-dom";
-import Appointments from "./pages/Appointments.tsx";
-import CreateAppointment from "./pages/CreateAppointment.tsx";
-import EditAppointment from "./pages/EditAppointment.tsx";
-import Home from "./pages/Home.tsx";
+import {Route, Routes} from "react-router-dom";
+import Appointments from "./components/Appointments.tsx";
+import CreateAppointment from "./components/CreateAppointment.tsx";
+import EditAppointment from "./components/EditAppointment.tsx";
+import Home from "./components/Home.tsx";
 import XRayDocuments from "./components/XRayDocuments.tsx";
 import './CSS/XrayImage.css';
+import Header from "./components/Header.tsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import ProtectedRoutes from "./Auth/ProtectedRoutes.tsx";
+import SubNavigation from "./components/SubNavigation.tsx";
 
-const Header = () => {
-    const location = useLocation();
+function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        axios.get("/api/auth/me")
+            .then(() => {
+                setIsLoggedIn(true);
+            })
+            .catch(() => setIsLoggedIn(false));
+    }, []);
 
     return (
-        <header className="main-header">
-            <nav>
-                <ul className="nav-links">
-                    <li>
-                        <Link to="/" className={location.pathname === "/" ? "active" : ""}>
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/appointments" className={location.pathname.includes("/appointments") ? "active" : ""}>
-                            Appointments
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/documents" className={location.pathname === "/documents" ? "active" : ""}>
-                            Documents
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/xray-documents" className={location.pathname === "/xray-documents" ? "active" : ""}>
-                            XRay Documents
-                        </Link>
-                    </li>
-                </ul>
-
-            </nav>
-        </header>
-    );
-};
-
-const SubNavigation = () => {
-    const location = useLocation();
-
-    if (location.pathname.includes("/appointments")) {
-        return (
-            <nav className="sub-nav">
-                <ul className="nav-links">
-                    <li>
-                        <Link to="/appointments"
-                              className={location.pathname === "/appointments" ? "active" : ""}>
-                            Appointments
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/create" className={location.pathname === "/create" ? "active" : ""}>
-                            New Appointment
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-        );
-    }
-    return null;
-};
-
-const App = () => {
-    return (
-        <Router>
+        <>
             <Header/>
-            <SubNavigation/>
+            {location.pathname.includes('/appointments') && <SubNavigation/>}
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/appointments" element={<Appointments/>}/>
-                <Route path="/create" element={<CreateAppointment/>}/>
-                <Route path="/edit/:id" element={<EditAppointment/>}/>
-                <Route path="/xray-documents" element={<XRayDocuments/>}/>
+                <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn}/>}>
+                    <Route path="/appointments" element={<Appointments/>}/>
+                    <Route path="/create" element={<CreateAppointment/>}/>
+                    <Route path="/edit/:id" element={<EditAppointment/>}/>
+                    <Route path="/xray-documents" element={<XRayDocuments/>}/>
+                </Route>
             </Routes>
-        </Router>
+        </>
     );
-};
+}
 
 export default App;
+
 
