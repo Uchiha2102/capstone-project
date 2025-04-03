@@ -13,4 +13,5 @@ public class Appointment {
     private String time;
     private String dentistName;
     private String description;
+    private String userId;
 }

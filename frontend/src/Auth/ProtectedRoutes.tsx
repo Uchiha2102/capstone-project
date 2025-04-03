@@ -4,10 +4,9 @@ type Props = {
     isLoggedIn: boolean
 }
 
-export default function ProtectedRoutes({isLoggedIn}: Readonly<Props>){
-    if(!isLoggedIn){
-        return <div>...Loading</div>
+export default function ProtectedRoutes({isLoggedIn}: Readonly<Props>) {
+    if (isLoggedIn === null) {
+        return <div>...Loading</div>;
     }
-
-    return isLoggedIn ? <Outlet/> : <Navigate to="/" />
+    return isLoggedIn ? <Outlet/> : <Navigate to="/login"/>;
 }

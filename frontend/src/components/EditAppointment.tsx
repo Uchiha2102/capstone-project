@@ -90,8 +90,8 @@ const EditAppointment = () => {
                             name="description"
                             value={appointment.description}
                             onChange={handleChange}
-                            required
-                        ></textarea>
+                            required>
+                        </textarea>
                     </div>
                     <button type="submit">Save changes</button>
                     <button type="button" onClick={() => navigate("/appointments")}>

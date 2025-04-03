@@ -24,7 +24,7 @@ const Header = () => {
                     </li>
                     <li>
                         <Link to="/xray-documents" className={location.pathname === "/xray-documents" ? "active" : ""}>
-                            XRay Documents
+                            X-Ray Documents
                         </Link>
                     </li>
                 </ul>

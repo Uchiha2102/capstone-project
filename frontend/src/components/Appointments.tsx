@@ -39,31 +39,18 @@ const Appointments = () => {
         <div className="appointments-container">
             <h1 className="appointments-title">Appointments</h1>
             <ul className="appointments-list">
-
-
-                {appointments.map((appointment) => (
-                    <li key={appointment.id} className="appointment-item">
+                {appointments.map(({id, date, time, dentistName, description}) => (
+                    <li key={id} className="appointment-item">
                         <div className="appointment-info">
                             <div className="appointment-date-time">
-
-                                <span className="date">{appointment.date}</span> –{" "}
-                                <span className="time">{appointment.time}</span>
+                                <span className="date">{date}</span> – <span className="time">{time}</span>
                             </div>
-                            <div className="appointment-dentist">{appointment.dentistName}</div>
-                            <div className="appointment-description">{appointment.description}</div>
+                            <div className="appointment-dentist">{dentistName}</div>
+                            <div className="appointment-description">{description}</div>
                         </div>
                         <div className="appointment-actions">
-                            <Link
-                                className="button edit-button"
-                                to={`/edit/${appointment.id}`}
-                            >
-                                Edit
-                            </Link>
-                            <button
-                                className="button delete-button"
-                                onClick={() => deleteAppointment(appointment.id)}
-                            >
-                                Delete
+                            <Link to={`/edit/${id}`} className="button edit-button">Edit</Link>
+                            <button className="button delete-button" onClick={() => deleteAppointment(id)}>Delete
                             </button>
                         </div>
                     </li>
@@ -72,4 +59,5 @@ const Appointments = () => {
         </div>
     );
 };
+
 export default Appointments;

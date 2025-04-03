@@ -1,5 +1,5 @@
 import './CSS/App.css'
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Appointments from "./components/Appointments.tsx";
 import CreateAppointment from "./components/CreateAppointment.tsx";
 import EditAppointment from "./components/EditAppointment.tsx";
@@ -11,15 +11,16 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ProtectedRoutes from "./Auth/ProtectedRoutes.tsx";
 import SubNavigation from "./components/SubNavigation.tsx";
+import Login from "./Auth/Login.tsx";
+import './CSS/LoginButton.css';
 
 function App() {
+    const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         axios.get("/api/auth/me")
-            .then(() => {
-                setIsLoggedIn(true);
-            })
+            .then(() => setIsLoggedIn(true))
             .catch(() => setIsLoggedIn(false));
     }, []);
 
@@ -28,7 +29,8 @@ function App() {
             <Header/>
             {location.pathname.includes('/appointments') && <SubNavigation/>}
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/" element={isLoggedIn ? <Home/> : <Navigate to="/login" replace/>}/>
                 <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn}/>}>
                     <Route path="/appointments" element={<Appointments/>}/>
                     <Route path="/create" element={<CreateAppointment/>}/>

@@ -8,39 +8,35 @@ type XRayImage = {
     data: string;
 }
 
-const userId = "12345"; //  Hier soll die Benutzer-ID aus dem Auth-System kommen
-
 const XRayDocuments: React.FC = () => {
     const [images, setImages] = useState<XRayImage[]>([]);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-
     useEffect(() => {
-        axios.get<XRayImage[]>(`/api/xray/user/${userId}`).then((res) => {
-            setImages(res.data);
-        });
+        axios.get<XRayImage[]>('/api/xray')
+            .then((res) => {
+                setImages(res.data);
+            })
+            .catch((err) => console.error("Error loading XRay documents:", err));
     }, []);
-
 
     const handleUpload = async () => {
         if (!selectedFile) return;
 
         const formData = new FormData();
         formData.append("file", selectedFile);
-        formData.append("userId", userId);
 
         try {
-            const res = await axios.post("/api/xray/upload", formData, {
+            const res = await axios.post("/api/xray", formData, {
                 headers: {"Content-Type": "multipart/form-data"},
             });
 
             setImages([...images, res.data]);
             setSelectedFile(null);
         } catch (error) {
-            console.error("Error while deleting:", error);
+            console.error("Error while uploading:", error);
         }
     };
-
 
     const handleDelete = async (id: string) => {
         try {
