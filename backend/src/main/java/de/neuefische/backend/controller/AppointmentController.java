@@ -27,7 +27,7 @@ public class AppointmentController {
        String userId = user.getAttributes().get("sub").toString();
        Appointment appointment = service.getAppointmentById(id);
 
-       if (appointment.getUserId().equals(userId)) {
+       if (!appointment.getUserId().equals(userId)) {
            throw new IllegalArgumentException("You don't have access to this appointment!");
        }
         return appointment;

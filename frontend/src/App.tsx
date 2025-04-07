@@ -13,6 +13,8 @@ import ProtectedRoutes from "./Auth/ProtectedRoutes.tsx";
 import SubNavigation from "./components/SubNavigation.tsx";
 import Login from "./Auth/Login.tsx";
 import './CSS/LoginButton.css';
+import DocumentsPage from "./components/DocumentsPage.tsx";
+
 
 function App() {
     const location = useLocation();
@@ -35,6 +37,7 @@ function App() {
                     <Route path="/appointments" element={<Appointments/>}/>
                     <Route path="/create" element={<CreateAppointment/>}/>
                     <Route path="/edit/:id" element={<EditAppointment/>}/>
+                    <Route path="/documents" element={<DocumentsPage/>}/>
                     <Route path="/xray-documents" element={<XRayDocuments/>}/>
                 </Route>
             </Routes>
