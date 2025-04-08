@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.exceptions.AccessDeniedException;
 import de.neuefische.backend.model.Appointment;
 import de.neuefische.backend.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class AppointmentController {
        Appointment appointment = service.getAppointmentById(id);
 
        if (!appointment.getUserId().equals(userId)) {
-           throw new IllegalArgumentException("You don't have access to this appointment!");
+           throw new AccessDeniedException("You don't have access to this appointment!");
        }
         return appointment;
     }
@@ -38,7 +39,6 @@ public class AppointmentController {
         String userId = user.getAttributes().get("sub").toString();
         appointment.setUserId(userId);
         return service.createAppointment(appointment);
-
     }
 
     @PutMapping("/{id}")
@@ -47,7 +47,7 @@ public class AppointmentController {
         Appointment existingAppointment = service.getAppointmentById(id);
 
         if (!existingAppointment.getUserId().equals(userId)) {
-            throw new IllegalArgumentException("You don't have access to update this appointment!");
+            throw new AccessDeniedException("You don't have access to update this appointment!");
         }
 
         appointment.setUserId(userId);
@@ -60,7 +60,7 @@ public class AppointmentController {
         Appointment appointment = service.getAppointmentById(id);
 
         if (!appointment.getUserId().equals(userId)) {
-            throw new IllegalArgumentException("Access denied: You cannot delete this appointment!");
+            throw new AccessDeniedException("Access denied: You cannot delete this appointment!");
         }
 
         service.deleteAppointment(id);

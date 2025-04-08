@@ -12,6 +12,9 @@ import java.util.List;
 public class AppointmentService {
     private final AppointmentRepository repository;
 
+    public List<Appointment> getAllAppointments() {
+        return repository.findAll();
+    }
 
     public Appointment getAppointmentById(String id) {
         return repository.findById(id)

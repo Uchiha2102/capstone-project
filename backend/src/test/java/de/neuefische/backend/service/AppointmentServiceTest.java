@@ -3,8 +3,6 @@ package de.neuefische.backend.service;
 import de.neuefische.backend.model.Appointment;
 import de.neuefische.backend.repository.AppointmentRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +10,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 class AppointmentServiceTest {
 
     private final AppointmentRepository appointmentRepository = mock(AppointmentRepository.class);
