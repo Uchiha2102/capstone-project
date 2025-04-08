@@ -4,14 +4,16 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
-@Document
-public class Appointment {
+@Document(collection = "xray_images")
+public class XRayImage {
     @Id
     private String id;
-    private String date;
-    private String time;
-    private String dentistName;
-    private String description;
     private String userId;
+    private String fileName;
+    private String fileType;
+    private byte[] data;
+    private Date uploadDate;
 }

@@ -12,7 +12,6 @@ import java.util.List;
 public class AppointmentService {
     private final AppointmentRepository repository;
 
-
     public List<Appointment> getAllAppointments() {
         return repository.findAll();
     }
@@ -40,4 +39,7 @@ public class AppointmentService {
         repository.deleteById(id);
     }
 
+    public List<Appointment> getAppointmentsByUserId(String userId) {
+        return repository.findByUserId(userId);
+    }
 }
