@@ -1,6 +1,5 @@
 package de.neuefische.backend.security;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
 
     @Value("${app.url}")
     private String appUrl;
@@ -31,12 +28,14 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-                .logout(l -> l.logoutSuccessUrl(appUrl + "/logout"))
+                .logout(l -> l
+                        .logoutUrl("/api/auth/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .oauth2Login(o -> o.defaultSuccessUrl(appUrl + "/"));
         return http.build();
     }
-
 }
-
