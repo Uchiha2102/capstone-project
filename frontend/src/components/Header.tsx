@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
+import Logout from "../Auth/Logout.tsx";
 
 const Header = () => {
     const location = useLocation();
@@ -29,6 +30,7 @@ const Header = () => {
                     </li>
                 </ul>
             </nav>
+            <Logout/>
         </header>
     );
 };

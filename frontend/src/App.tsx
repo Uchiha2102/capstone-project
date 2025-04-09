@@ -14,7 +14,7 @@ import SubNavigation from "./components/SubNavigation.tsx";
 import Login from "./Auth/Login.tsx";
 import './CSS/LoginButton.css';
 import DocumentsPage from "./components/DocumentsPage.tsx";
-
+import './CSS/LogoutButton.css';
 
 function App() {
     const location = useLocation();
