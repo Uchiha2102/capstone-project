@@ -108,4 +108,15 @@ class InvoiceDocumentServiceTest {
         assertNull(result);
         verify(repository,times(1)).findById(invoiceId);
     }
+
+    @Test
+    void deleteInvoice_shouldDeleteInvoiceById() {
+        //GIVEN
+        String invoiceId = "1";
+        //WHEN
+        service.deleteInvoice(invoiceId);
+        //THEN
+        verify(repository,times(1)).deleteById(invoiceId);
+    }
+
 }
