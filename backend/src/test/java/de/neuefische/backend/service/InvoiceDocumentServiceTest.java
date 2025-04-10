@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -80,6 +81,31 @@ class InvoiceDocumentServiceTest {
         verify(repository, times(1)).findByUserId(userId);
     }
 
+    @Test
+    void getInvoiceById_shouldReturnIfExists() {
+        String invoiceId = "1";
+        InvoiceDocument mockInvoice = new InvoiceDocument();
+        mockInvoice.setId(invoiceId);
 
+        when(repository.findById(invoiceId)).thenReturn(Optional.of(mockInvoice));
+
+        InvoiceDocument result = service.getInvoiceById(invoiceId);
+
+        assertNotNull(result);
+        assertEquals(invoiceId, result.getId());
+        verify(repository, times(1)).findById(invoiceId);
+    }
+
+    @Test
+    void getInvoiceById_shouldReturnNullIfInvoiceDoesNotExist() {
+        //GIVEN
+        String invoiceId = "1";
+        when(repository.findById(invoiceId)).thenReturn(Optional.empty());
+        //WHEN
+        InvoiceDocument result = service.getInvoiceById(invoiceId);
+
+        //THEN
+        assertNull(result);
+        verify(repository,times(1)).findById(invoiceId);
+    }
 }
-
