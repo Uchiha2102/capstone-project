@@ -1,6 +1,9 @@
 import {useEffect} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router";
+import {Button} from "@mui/material";
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 export default function Login() {
     const navigate = useNavigate();
@@ -16,11 +19,18 @@ export default function Login() {
             .catch(() => console.log("User not logged in"));
     }, []);
 
-    return(
+    return (
         <div className="login-page">
-        <div className="login-container">
-    <button className="login-button" onClick={login}>Login with Google</button>
-        </div>
+            <div className="login-container">
+                <Button className="login-button"
+                        variant="contained"
+                        onClick={login}
+                        startIcon={<GoogleIcon/>}>
+                    Sign in with Google
+                </Button>
+            </div>
         </div>
     );
 }
+
+

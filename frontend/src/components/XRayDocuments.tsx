@@ -1,5 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {CloudUpload, Delete} from '@mui/icons-material';
+import Button from '@mui/material/Button';
+
 
 type XRayImage = {
     id: string;
@@ -53,18 +56,25 @@ const XRayDocuments: React.FC = () => {
 
 
             <input type="file" accept="image/*" onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}/>
-            <button onClick={handleUpload} className="ml-2 p-2 bg-blue-500 text-white rounded">
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<CloudUpload/>}
+                onClick={handleUpload}
+                className="ml-2">
                 Upload
-            </button>
+            </Button>
 
             <div className="xray-gallery">
                 {images.map((image) => (
                     <div key={image.id} className="xray-item">
                         <img src={`data:${image.fileType};base64,${image.data}`} alt={image.fileName}/>
                         <p>{image.fileName}</p>
-                        <button onClick={() => handleDelete(image.id)}>
+                        <Button
+                            startIcon={<Delete/>}
+                            onClick={() => handleDelete(image.id)}>
                             Delete
-                        </button>
+                        </Button>
                     </div>
                 ))}
             </div>
