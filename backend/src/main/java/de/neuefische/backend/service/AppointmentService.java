@@ -5,6 +5,7 @@ import de.neuefische.backend.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -42,4 +43,14 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByUserId(String userId) {
         return repository.findByUserId(userId);
     }
+
+
+    public List<Appointment> getPastAppointmentsByUserId(String userId) {
+        List<Appointment> allAppointments = repository.findByUserId(userId);
+        
+        return allAppointments.stream()
+                .filter(appointment -> LocalDate.parse(appointment.getDate()).isBefore(LocalDate.now()))
+                .toList();
+    }
+
 }

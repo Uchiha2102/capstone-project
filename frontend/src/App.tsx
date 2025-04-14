@@ -16,6 +16,9 @@ import './CSS/LoginButton.css';
 import DocumentsPage from "./components/DocumentsPage.tsx";
 import './CSS/LogoutButton.css';
 import './CSS/Home.css';
+import AppointmentHistory from "./components/AppointmentHistory.tsx";
+import './CSS/SubNavigation.css';
+import './CSS/AppointmentHistory.css';
 
 function App() {
     const location = useLocation();
@@ -36,6 +39,7 @@ function App() {
                 <Route path="/" element={isLoggedIn ? <Home/> : <Navigate to="/login" replace/>}/>
                 <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn}/>}>
                     <Route path="/appointments" element={<Appointments/>}/>
+                    <Route path="/appointments/history" element={<AppointmentHistory/>}/>
                     <Route path="/create" element={<CreateAppointment/>}/>
                     <Route path="/edit/:id" element={<EditAppointment/>}/>
                     <Route path="/documents" element={<DocumentsPage/>}/>

@@ -4,6 +4,7 @@ import de.neuefische.backend.model.Appointment;
 import de.neuefische.backend.repository.AppointmentRepository;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,5 +112,54 @@ class AppointmentServiceTest {
         //THEN
         verify(appointmentRepository).deleteById(id);
 
+    }
+
+    @Test
+    void shouldGetAppointmentsByUserId() {
+        // GIVEN
+        String userId = "123";
+        Appointment appointment1 = new Appointment();
+        appointment1.setId("1");
+        appointment1.setUserId(userId);
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setId("2");
+        appointment2.setUserId(userId);
+
+        when(appointmentRepository.findByUserId(userId)).thenReturn(List.of(appointment1, appointment2));
+
+        // WHEN
+        List<Appointment> result = appointmentService.getAppointmentsByUserId(userId);
+
+        // THEN
+        assertEquals(2, result.size());
+        assertEquals(userId, result.get(0).getUserId());
+        assertEquals(userId, result.get(1).getUserId());
+        verify(appointmentRepository).findByUserId(userId);
+    }
+
+    @Test
+    void shouldGetPastAppointmentByUserId() {
+        //GIVEN
+        String userId = "123";
+
+        Appointment pastAppointment = new Appointment();
+        pastAppointment.setId("1");
+        pastAppointment.setDate(LocalDate.now().minusDays(5).toString()); // vergangenes Datum
+
+        Appointment futureAppointment = new Appointment();
+        futureAppointment.setId("2");
+        futureAppointment.setUserId(userId);
+        futureAppointment.setDate(LocalDate.now().plusDays(5).toString()); //zukünftiges Datum
+
+        when(appointmentRepository.findByUserId(userId)).thenReturn(List.of(pastAppointment,futureAppointment));
+
+        //WHEN
+        List<Appointment> result = appointmentService.getPastAppointmentsByUserId(userId);
+
+        //THEN
+        assertEquals(1,result.size());
+        assertEquals(pastAppointment.getId(), result.get(0).getId());
+        verify(appointmentRepository).findByUserId(userId);
     }
 }
