@@ -1,5 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {CloudUpload, Delete} from '@mui/icons-material';
+import Button from '@mui/material/Button';
+
 interface InvoiceDocument {
     id: string;
     fileName: string;
@@ -53,25 +56,33 @@ const DocumentsPage = () => {
                 accept=".pdf,.doc,.docx,.txt,.xls,.xlsx,.csv,.png,.jpeg,.jpg"
                 onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
             />
-            <button onClick={handleUpload} className="ml-2 p-2 bg-blue-500 text-white rounded">
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<CloudUpload/>}
+                onClick={handleUpload}
+                className="ml-2">
                 Upload
-            </button>
+            </Button>
 
-            <div className="xray-gallery">
+            <div className="xray-gallery mt-4">
                 {documents.map((document) => (
-                    <div key={document.id} className="xray-item">
+                    <div key={document.id} className="xray-item p-2 border mb-2 flex justify-between items-center">
                         {document.fileType.includes("image") ? (
                             <img
                                 src={`data:${document.fileType};base64,${document.data}`}
                                 alt={document.fileName}
+                                className="w-16 h-16 object-cover mr-4"
                             />
                         ) : (
                             <p>{document.fileName}</p>
                         )}
-                        <p>{document.fileName}</p>
-                        <button onClick={() => handleDelete(document.id)}>
+                        <p className="mr-4">{document.fileName}</p>
+                        <Button
+                            startIcon={<Delete/>}
+                            onClick={() => handleDelete(document.id)}>
                             Delete
-                        </button>
+                        </Button>
                     </div>
                 ))}
             </div>
@@ -80,6 +91,8 @@ const DocumentsPage = () => {
 };
 
 export default DocumentsPage;
+
+
 
 
 

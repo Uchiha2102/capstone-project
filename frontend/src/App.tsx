@@ -5,7 +5,7 @@ import CreateAppointment from "./components/CreateAppointment.tsx";
 import EditAppointment from "./components/EditAppointment.tsx";
 import Home from "./components/Home.tsx";
 import XRayDocuments from "./components/XRayDocuments.tsx";
-import './CSS/XrayImage.css';
+import './CSS/XrayImageAndDocuments.css';
 import Header from "./components/Header.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
