@@ -15,7 +15,6 @@ class AppointmentServiceTest {
     private final AppointmentRepository appointmentRepository = mock(AppointmentRepository.class);
     private final AppointmentService appointmentService = new AppointmentService(appointmentRepository);
 
-
     @Test
     void shouldGetALlAppointments() {
         // GIVEN

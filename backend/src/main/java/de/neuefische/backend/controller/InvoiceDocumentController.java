@@ -1,6 +1,5 @@
 package de.neuefische.backend.controller;
 
-
 import de.neuefische.backend.model.InvoiceDocument;
 import de.neuefische.backend.service.InvoiceDocumentService;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +48,6 @@ public class InvoiceDocumentController {
             return ResponseEntity.badRequest().body("Error uploading file");
         }
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteInvoice(@PathVariable String id,
