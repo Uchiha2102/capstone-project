@@ -94,4 +94,26 @@ class DentalNoteServiceTest {
         verify(repository,times(1)).save(existingNote);
 
         }
+
+        @Test
+        void deleteNote_shouldDeleteExistingNote() {
+
+            //GIVEN
+            String id = "note1";
+            String userId = "user123";
+
+            DentalNote existingNote = new DentalNote();
+            existingNote.setId(id);
+            existingNote.setUserId(userId);
+
+            when(repository.findById(id)).thenReturn(Optional.of(existingNote));
+            doNothing().when(repository).deleteById(id);
+
+            //WHEN
+            service.deleteNoteById(id,userId);
+
+            //THEN
+            verify(repository,times(1)).findById(id);
+            verify(repository,times(1)).deleteById(id);
+    }
     }
