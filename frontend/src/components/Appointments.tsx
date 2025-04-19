@@ -2,15 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import "../CSS/Appointments.css";
-
-type Appointment = {
-    id: string;
-    date: string;
-    time: string;
-    dentistName: string;
-    description: string;
-
-};
+import {Appointment} from "../types/Appointment.tsx";
 
 const Appointments = () => {
     const [appointments, setAppointments] = useState<Appointment[]>([]);

@@ -5,74 +5,174 @@
     justify-content: flex-start;
     min-height: 100vh;
     padding: 20px;
-    gap: 30px;
+    gap: 20px;
+    background-color: #fcf9f9;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+.titel-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 600px;
+    margin: 20px 0;
+    color: #3a8ed1;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(58, 142, 209, 0.3);
+    animation: fadeInText 1.5s ease-in-out;
 }
 
 .info-text {
-    font-size: 1.2rem;
-    margin: 20px 0;
-    line-height: 1.5;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    line-height: 1.8;
     text-align: center;
-    max-width: 800px;
-    color: #555;
+    color: #2a72b7;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    padding: 10px 20px;
+    max-width: 600px;
+    transition: color 0.3s ease;
 }
 
+
+
 .summary-section {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
     background-color: #ffffff;
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    max-width: 350px;
-    z-index: 1000;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 10;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
 .summary-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    background-color: #f5f8fa;
-    border: 1px solid #e3e6ea;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 1.05rem;
-    font-weight: 500;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
     color: #4a4a4a;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    line-height: 1.5;
 }
 
-.summary-item:hover {
-    background-color: #e9f2ff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.titel-image-home {
+    margin-top: 1px;
+    color: #3a8ed1;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInTitle 1.5s ease-in-out;
 }
 
-.quick-links {
-    margin-top: 100px;
+@keyframes fadeInTitle {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container-tooth-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.container-tooth-image img {
+    width: 250px;
+    height: auto;
+    max-width: 100%;
+    animation: fadeInScale 1.5s ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     margin: 5px;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: bold;
+    background-color: #3a8ed1;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-.btn-create {
-    background-color: deepskyblue;
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.btn-documents {
-    background-color: deepskyblue;
-}
+@media (max-width: 600px) {
+    .home-container {
+        padding: 10px;
+        gap: 15px;
+    }
 
-.btn-xray {
-    background-color: deepskyblue;
+    .info-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    .container-tooth-image img {
+        width: 150px;
+    }
+
+    .titel-image-home {
+        font-size: 1.6rem;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .summary-section {
+        margin-top: 10px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .summary-item {
+        font-size: 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 0.9rem;
+        margin: 10px 0;
+    }
 }

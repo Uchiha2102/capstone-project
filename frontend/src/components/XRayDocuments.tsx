@@ -2,14 +2,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {CloudUpload, Delete} from '@mui/icons-material';
 import Button from '@mui/material/Button';
+import {XRayImage} from "../types/XrayImage.tsx";
 
-
-type XRayImage = {
-    id: string;
-    fileName: string;
-    fileType: string;
-    data: string;
-}
 
 const XRayDocuments: React.FC = () => {
     const [images, setImages] = useState<XRayImage[]>([]);

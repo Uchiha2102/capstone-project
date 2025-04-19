@@ -19,6 +19,8 @@ import './CSS/Home.css';
 import AppointmentHistory from "./components/AppointmentHistory.tsx";
 import './CSS/SubNavigation.css';
 import './CSS/AppointmentHistory.css';
+import DentalNotes from "./components/DentalNotes.tsx";
+import './CSS/DentalNotes.css';
 
 function App() {
     const location = useLocation();
@@ -44,6 +46,7 @@ function App() {
                     <Route path="/edit/:id" element={<EditAppointment/>}/>
                     <Route path="/documents" element={<DocumentsPage/>}/>
                     <Route path="/xray-documents" element={<XRayDocuments/>}/>
+                    <Route path="/dental-notes" element={<DentalNotes/>}/>
                 </Route>
             </Routes>
         </>

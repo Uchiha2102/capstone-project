@@ -1,13 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {PastAppointment} from "../types/PastAppointment.tsx";
 
-type PastAppointment = {
-    id: string;
-    date: string;
-    time : string;
-    dentistName: string;
-    description: string;
-};
 
 const AppointmentHistory = () => {
     const [pastAppointments, setPastAppointments] = useState<PastAppointment[]>([]);

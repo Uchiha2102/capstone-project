@@ -1,0 +1,203 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 50px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.dental-notes-container {
+    width: 60%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.dental-notes-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+
+}
+
+.dental-notes-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.dental-input {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.dental-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.dental-add-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dental-add-btn:hover {
+    background-color: #218838;
+}
+
+.dental-notes-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dental-note-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
+}
+
+.dental-delete-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 1ms;
+}
+
+.dental-delete-btn:hover {
+    background-color: #c82333;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.container-home-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideInFromRight 1.5s ease-out forwards;
+}
+
+.container-home-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+
+}
+
+.container-home-image h4 {
+    font-size: 11px;
+    text-align: center;
+    margin: 0;
+}
+.container-home-image h5 {
+    font-size: 11px;
+    text-align: center;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .dental-notes-container {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px;
+        font-size: 0.9rem;
+        margin: 10px 0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dental-notes-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .dental-notes-form {
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+    }
+
+    .dental-input {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    .dental-add-btn {
+        width: 50%;
+        text-align: center;
+    }
+
+    .dental-notes-list {
+        width: 100%;
+        padding: 0;
+    }
+
+    .dental-note-item {
+        align-items: flex-start; /
+        padding: 10px;
+    }
+
+    .dental-delete-btn {
+        width: auto;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+

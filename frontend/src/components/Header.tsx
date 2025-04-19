@@ -25,7 +25,12 @@ const Header = () => {
                     </li>
                     <li>
                         <Link to="/xray-documents" className={location.pathname === "/xray-documents" ? "active" : ""}>
-                            X-Ray Documents
+                            X-ray Documents
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/dental-notes" className={location.pathname === "/dental-notes" ? "active" : ""}>
+                            My Teeth Notes
                         </Link>
                     </li>
                 </ul>
