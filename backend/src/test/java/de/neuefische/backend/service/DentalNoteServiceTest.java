@@ -6,6 +6,7 @@ import de.neuefische.backend.repository.DentalNoteRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -63,4 +64,34 @@ class DentalNoteServiceTest {
         verify(repository, times(1)).save(note);
 
     }
-}
+
+    @Test
+    void updateNote_shouldUpdateExistingNote() {
+        //GIVEN
+        String id = "note1";
+        String userId = "user123";
+
+        DentalNote existingNote = new DentalNote();
+        existingNote.setId(id);
+        existingNote.setUserId(userId);
+        existingNote.setTooth("oldTooth");
+        existingNote.setNote("oldNote");
+
+        DentalNote updatedNote = new DentalNote();
+        updatedNote.setTooth("newTooth");
+        updatedNote.setNote("newNote");
+
+        when(repository.findById(id)).thenReturn(Optional.of(existingNote));
+        when(repository.save(existingNote)).thenReturn(existingNote);
+
+        //WHEN
+        DentalNote result = service.updateNote(id, userId, updatedNote);
+
+        //THEN
+        assertThat(result.getTooth()).isEqualTo("newTooth");
+        assertThat(result.getNote()).isEqualTo("newNote");
+        verify(repository, times(1)).findById(id);
+        verify(repository,times(1)).save(existingNote);
+
+        }
+    }
