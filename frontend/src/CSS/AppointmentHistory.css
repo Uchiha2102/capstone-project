@@ -31,3 +31,24 @@
     margin-bottom: 5px;
     font-size: 0.9rem;
 }
+@media (max-width: 600px) {
+    .history-container {
+        padding: 15px;
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .history-title {
+        font-size: 1.5rem;
+    }
+
+    .history-item {
+        padding: 10px;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .history-info div {
+        font-size: 0.8rem;
+    }
+}

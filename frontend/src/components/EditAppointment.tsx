@@ -1,14 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
-type Appointment = {
-    id: string;
-    date: string;
-    time: string;
-    dentistName: string;
-    description: string;
-}
+import {Appointment} from "../types/Appointment.tsx";
 
 const EditAppointment = () => {
     const {id} = useParams<{ id: string }>();

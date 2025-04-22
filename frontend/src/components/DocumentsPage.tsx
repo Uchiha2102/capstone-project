@@ -2,14 +2,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {CloudUpload, Delete} from '@mui/icons-material';
 import Button from '@mui/material/Button';
+import {InvoiceDocument} from "../types/InvoiceDocument.tsx";
 
-interface InvoiceDocument {
-    id: string;
-    fileName: string;
-    fileType: string;
-    uploadDate: string;
-    data: string;
-}
 
 const DocumentsPage = () => {
     const [documents, setDocuments] = useState<InvoiceDocument[]>([]);
