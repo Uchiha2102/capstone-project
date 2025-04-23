@@ -1,5 +1,6 @@
 package de.neuefische.backend.service;
 
+
 import de.neuefische.backend.model.Appointment;
 import de.neuefische.backend.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;

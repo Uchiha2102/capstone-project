@@ -1,5 +1,6 @@
 package de.neuefische.backend.service;
 
+import de.neuefische.backend.exceptions.ResourceNotFoundException;
 import de.neuefische.backend.model.XRayImage;
 import de.neuefische.backend.repository.XRayImageRepository;
 
@@ -34,7 +35,9 @@ public class XRayImageService {
     }
 
     public XRayImage getImageById(String id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("XRayImage with ID " + id + " not found"));
+
     }
 
     public void deleteImage(String id) {
